@@ -3,7 +3,7 @@ if game.PlaceId == 5203883770 then
 		game:GetService("CoreGui").Orion:Destroy()
 	end
 	local plr = game.Players.LocalPlayer
-	local Jg7vmhhGY6 = "klat hub on top"
+	local Jg7vmhhGY6 = "k1"
 	local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 	local key = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = true, IntroEnabled = false, ConfigFolder = "Ymshe"})
 	OrionLib:MakeNotification({
@@ -30,8 +30,7 @@ if game.PlaceId == 5203883770 then
 					Image = "rbxassetid://4483345998",
 					Time = 5
 				})
-				wait(2)
-				wait(1)
+				wait(1.4)
 			    local tweenInf = TweenInfo.new(0.25,Enum.EasingStyle.Quart,Enum.EasingDirection.Out)
                 local sethidden = sethiddenproperty or set_hidden_property or set_hidden_prop
                 local gethidden = gethiddenproperty or get_hidden_property or get_hidden_prop
@@ -546,25 +545,15 @@ if game.PlaceId == 5203883770 then
 					 loadstring(game:HttpGet('\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\79\109\110\105\112\111\116\101\110\99\101\68\101\118\101\108\111\112\101\114\47\78\117\109\98\101\114\47\109\97\105\110\47\49\46\108\117\97'))()
  			        end
 			    end)
-    
+                
+				
+				function getRoot(char)
+					local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+					return rootPart
+				end
 
 
-			    spawn(function ()
-  			      function massplay()
-					 local Player = game.Players.LocalPlayer
-					 local Char = Player.Character
-					 for i,v in pairs(Player.Backpack:GetDescendants()) do
-					  if (v:IsA('Tool')) then
-						    v.Parent = Player.Character
-						    end
-					  end
-					    for i,v in pairs(Char:GetDescendants()) do
-						    if (v:IsA('RemoteEvent')) then
-							   v:FireServer('PlaySong', ID)
-						  end
-					  end
-					end
-				end)   
+  
 					
 				local function GetHandleTools(p)
 					p = p or Players.LocalPlayer
@@ -582,6 +571,44 @@ if game.PlaceId == 5203883770 then
 					return r
 				end
     
+				local Radio = Window:MakeTab({
+   			     Name = "radio stuff",
+    			    Icon = "rbxassetid://4483345998",
+   			        PremiumOnly = false
+			    })
+				
+				local massplaySection = Radio:AddSection({
+  			      Name = "massplay"
+			    })
+          
+				massplaySection:AddButton({
+					Name = "massplay",
+					Callback = function()						
+						local Player = game.Players.LocalPlayer
+						local Char = Player.Character
+	
+						for i,v in pairs(Player.Backpack:GetDescendants()) do
+							if (v:IsA('Tool')) then
+								v.Parent = Player.Character
+							end
+						end
+						for i,v in pairs(Char:GetDescendants()) do
+							if (v:IsA('RemoteEvent')) then
+								v:FireServer('PlaySong',_G.AUDIOID)
+							end
+						end 
+					end
+				})
+				
+
+				massplaySection:AddTextbox({
+					Name = "massplay",
+					Default = "",
+					TextDisappear = false,
+					Callback = function(SongId)
+						_G.AUDIOID = (SongId)
+					end
+				})
     
     
 			    -- [Kill Script Premuim Only] --
